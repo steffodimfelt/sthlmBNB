@@ -1,0 +1,21 @@
+<ion-view view-title="sthlmBNB">
+    <ion-content class="sthlmBNB-dark-blue-bg" ng-cloak>
+        <div class="hero-div">
+            <div class="hero-logo">
+                <h2 class="hero-head">sthlm<BR>BNB</h2>
+            </div>
+            <div class="hero-img">
+                <img class=" img-larger" src="img/sthlm.png">
+            </div>
+        </div>
+
+        <ion-list>
+            <ion-item ng-repeat="room in allRooms" href="#/tab/rooms/{{room.room_ID}}" class="card">
+                <img class="sthlmBNB-list-img" src="img/room-images/{{room.room_image_01}}" />
+                <h2 style="padding-top:1rem;">{{room.room_headline}}</h2>
+                <h3>{{room.room_cost}}kr</h3>
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,204 @@
+<ion-view view-title="sthlmBNB">
+    <ion-content id="roomContent">
+        <div id="allform">
+            <div ng-controller="changeImg">
+                <div class="row sthlmBNB-no-pad">
+                    <img class="sthlmBNB-list-img" src="img/room-images/{{selectedImage}}">
+                </div>
+                <div class="row sthlmBNB-no-pad">
+                    <div class="col sthlmBNB-no-pad">
+                        <img class="sthlmBNB-list-img sthlmBNB-hover-hand sthlm-BNB-border reduce-right-border" src="img/room-images/{{oneRoom.room_image_01}}" ng-click="setSelectedImage(oneRoom.room_image_01)">
+                    </div>
+                    <div class="col sthlmBNB-no-pad">
+                        <img class="sthlmBNB-list-img sthlmBNB-hover-hand sthlm-BNB-border reduce-left-border" src="img/room-images/{{oneRoom.room_image_02}}" ng-click="setSelectedImage(oneRoom.room_image_02)">
+                    </div>
+                </div>
+                 <!-- Set first image when load page -->
+                {{firstSelectedImage(oneRoom.room_image_01)}}
+            </div>
+
+
+            <div class="row sthlmBNB-no-pad">
+                <div class="col p-3 sthlmBNB-middlelight-blue-bg ">
+                <h2 class="inline-text text-white">{{oneRoom.room_headline}}</h2>
+                </div>
+            </div>
+            
+            <div class="row sthlmBNB-no-pad">
+                <div class=" col-7 p-3 sthlmBNB-light-blue-bg text-dark-blue">
+                    <h2 class="inline-text text-white">{{oneRoom.room_size}} pers</h2>
+                </div>
+                <div class=" col-5 p-3 sthlmBNB-middle-blue-bg text-right">
+                    <h2 class="inline-text text-white text-right ">{{oneRoom.room_cost}}kr</h2>
+                </div>
+            </div>
+
+            <div class="row p-4">
+                <p>{{oneRoom.room_description}}</p>
+            </div>
+
+            <div class="row p-4 sthlmBNB-middle-grey-bg">
+                <h2>Det här hittar du i rummet:</h2>
+                <p class="p-mini" ng-bind-html="oneRoom.room_options | nl2br"></p>
+            </div>
+
+            <div id="calendar" class="sthlmBNB-no-pad sthlmBNB-light-grey-bg " ng-controller="manageCustomers">
+                <div class="row p-4 sthlmBNB-light-blue-bg ">
+                    <h1 class="text-white inline-text">Boka rum</h1>
+                </div>
+                <div class="row sthlmBNB-no-pad sthlmBNB-light-grey-bg margin-top-10 ">
+                    <div class="col sthlmBNB-no-pad">
+                        <div class="row p-1">
+                            <h2 class="required">Vuxna</h2>
+                        </div>
+                        <div class="row sthlmBNB-no-pad">
+                            <div class="col padding-left-10">
+                                <button class="button button-positive inline-text" ng-click="manageCustomer(oneRoom.room_size,2,oneRoom.room_cost)">-</button>
+                            </div>
+                            <div class="col sthlmBNB-no-pad">
+                                <h1 class="sthlmBNB-align-center padding-left-5 inline-text">{{adultCustomer}}</h1>
+                            </div>
+                            <div class="col sthlmBNB-no-pad">
+                                <button class="button button-positive" ng-click="manageCustomer(oneRoom.room_size,1,oneRoom.room_cost)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col sthlmBNB-no-pad">
+                        <div class="row p-1">
+                            <h2>Barn</h2>
+                        </div>
+                        <div class="row sthlmBNB-no-pad">
+                            <div class="col sthlmBNB-no-pad">
+                                <button class="button button-positive" ng-click="manageCustomer(oneRoom.room_size,4,oneRoom.room_cost)">-</button>
+                            </div>
+                            <div class="col sthlmBNB-no-pad">
+                                <h1 class="sthlmBNB-align-center padding-left-15 inline-text">{{childCustomer}}</h1>
+                            </div>
+                            <div class="col sthlmBNB-no-pad">
+                                <button class="button button-positive" ng-click="manageCustomer(oneRoom.room_size,3,oneRoom.room_cost)">+</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END: Number of customers -->
+
+                <!-- Felmeddelande -->
+                    <div id="errorMSG" class="bg-danger  " style="display: none;">
+                        <p  class="text-white p-3 p-error " ng-bind-html="customerResoponse | nl2br"></p>
+                    </div >
+
+                <!-- DatePicker -->
+                <div class="row" style="padding-top:1rem;">
+                        <h2 class="required">Datum</h2>
+                    </div>
+                <div class="row sthlmBNB-paddin-top margin-left-10 sthlmBNB-light-grey-bg ">
+                    <div class="col sthlmBNB-no-pad"></div>
+                    <div class="col sthlmBNB-no-pad"></div>
+                    <div class="col  sthlmBNB-button-div inline-tex" ng-repeat="day in week1">
+                        <button id="day{{day.id}}" ng-style="day{{day.id}}" ng-click="day{{day.id}}=manageDatePicker(day,oneRoom.room_cost)" class="button button-small button-positive inline-text sthlmBNB-align-center ">
+                            {{day.id}}
+                        </button>
+                    </div>
+                </div>
+                <div class="row sthlmBNB-paddin-top margin-left-10">
+                    <div class="col sthlmBNB-no-pad inline-tex " ng-repeat="day in week2">
+                        <button id="day{{day.id}}" ng-style="day{{day.id}}" ng-click="day{{day.id}}=manageDatePicker(day,oneRoom.room_cost)" class="button button-small button-positive inline-text sthlmBNB-align-center ">
+                            {{day.id}}
+                        </button>
+                    </div>
+                </div>
+                <div class="row sthlmBNB-paddin-top margin-left-10">
+                    <div class="col sthlmBNB-no-pad inline-tex" ng-repeat="day in week3">
+                        <button id="day{{day.id}}" ng-style="day{{day.id}}" ng-click="day{{day.id}}=manageDatePicker(day,oneRoom.room_cost)" class="button button-small button-positive inline-text sthlmBNB-align-center ">
+                            {{day.id}}
+                        </button>
+                    </div>
+                </div>
+                <div class="row sthlmBNB-paddin-top margin-left-10">
+                    <div class="col sthlmBNB-no-pad inline-tex" ng-repeat="day in week4">
+                        <button id="day{{day.id}}" ng-style="day{{day.id}}" ng-click="day{{day.id}}=manageDatePicker(day,oneRoom.room_cost)" class="button button-small button-positive inline-text sthlmBNB-align-center ">
+                            {{day.id}}
+                        </button>
+                    </div>
+                </div>
+                <div class="row sthlmBNB-paddin-top margin-left-10">
+                    <div class="col sthlmBNB-no-pad inline-tex" ng-repeat="day in week5">
+                        <button id="day{{day.id}}" ng-style="day{{day.id}}" ng-click="day{{day.id}}=manageDatePicker(day,oneRoom.room_cost)" class="button button-small button-positive inline-text sthlmBNB-align-center ">
+                            {{day.id}}
+                        </button>
+                    </div>
+                    <div class="col sthlmBNB-no-pad"></div>
+                    <div class="col sthlmBNB-no-pad"></div>
+                </div>
+                <!--END: DatePicker -->
+                <div class="row p-4 sthlmBNB-middle-blue-bg margin-top-10">
+                    <div class="row"><h2 class="text-white">{{responseDays}}</h2></div>
+                    <div class="row"><h2 class="text-white">Total kostnad: {{totalCost}}kr</h2></div>
+                
+                </div>
+            </div>
+
+            <div id="persona" class="padding" ng-controller="AppCtrl">
+                <h2 style="padding-top:1rem;padding-bottom:1rem;">Fyll i dina personuppgifter</h2>
+                <form name="myForm" ng-submit="mySubmit()">
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label required">Förnamn</span>
+                        <input type="text" name="reservation_firstname" required placeholder="Ange förnamn" ng-model="data.reservation_firstname">
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label required">Efternamn</span>
+                        <input type="text" name="reservation_lastname" required placeholder="Ange efternamn" ng-model="data.reservation_lastname">
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label required">E-post</span>
+                        <input type="email" name="reservation_email" required placeholder="Ange e-post" ng-model="data.reservation_email">
+                    </label>
+                    <div ng-show="myForm.reservation_email.$error.email" class="error bg-danger"><p  class="text-white p-3 p-error " >Ange en giltig e-postadress</p></div> 
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label required">Mobil/Telefon</span>
+                        <input type="tel" name="reservation_phone" required placeholder="Ange mobil eller telefon" ng-model="data.reservation_phone">
+                    </label>
+
+                    <!-- Dolda fält -->
+
+                    <input type="hidden" name="reservation_room_id" ng-value="data.reservation_room_id=oneRoom.room_ID" ng-model="data.reservation_room_id">
+
+                    <input type="hidden" name="reservation_room_headline" ng-value="data.reservation_room_headline=oneRoom.room_headline" ng-model="data.reservation_room_headline">
+
+                    <input type="hidden" name="reservation_adult" ng-value="data.reservation_adult=adultCustomerOut" ng-model="data.reservation_adult">
+
+                    <input type="hidden" name="reservation_child" ng-value="data.reservation_child=childCustomerOut" ng-model="data.reservation_child">
+
+                    <input type="hidden" name="reservation_arrival" ng-value="data.reservation_arrival=arrivalOut" ng-model="data.reservation_arrival">
+
+                    <input type="hidden" name="reservation_department" ng-value="data.reservation_department=departmentOut" ng-model="data.reservation_department">
+
+                    <input type="hidden" name="reservation_total_days" ng-value="data.reservation_total_days=totalDaysOut" ng-model="data.reservation_total_days">
+
+                    <input type="hidden" name="reservation_total_cost" ng-value="data.reservation_total_cost=totalCostOut" ng-model="data.reservation_total_cost">
+
+                    <input type="hidden" name="reservation_one_cost" ng-value="data.reservation_one_cost=oneRoom.room_cost" ng-model="data.reservation_one_cost">
+                    <div style="padding-top:1rem;"><h3 >Antal vuxna, datum och kontaktuppgifter med asterisk (*) måste fyllas i innan slutlig bokning kan genomföras.</h3></div>
+                    <input type="submit" value="Skicka bokning" class="button button-block button-positive sthlmBNB-orange-bg" ng-disabled="!(!!data.reservation_firstname && !!data.reservation_lastname  && !!data.reservation_email && !!data.reservation_phone && !!data.reservation_adult && !!data.reservation_arrival)">
+                </form>
+            </div>
+        </div>
+        <div id="respons" class="p-5" style="display: none;">
+            <h2 class="text-white">Hej {{customerOut.reservation_firstname}} {{customerOut.reservation_lastname}}!<BR>Tack för din bokning!</h2>
+                <p class="text-white">Du har bokat {{oneRoom.room_headline}} <BR>
+                från {{arrivalOut}} till {{departmentOut}}<BR>
+                Antal vuxna: {{adultCustomerOut}}<BR> 
+                Antal barn: {{childCustomerOut}}<BR>
+                Totalt antal dagar: {{totalDaysOut}} á {{totalCostOut/totalDaysOut}}kr<BR>
+                Total summa: {{totalCostOut}}kr <BR><BR>
+                Välkommen till oss!</p>
+        </div>
+    </ion-content>
+
+</ion-view>

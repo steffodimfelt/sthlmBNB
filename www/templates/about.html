@@ -1,0 +1,40 @@
+<ion-view view-title="sthlmBNB" class="sthlmBNB-light-grey-bg">
+    <ion-content  ng-cloak >
+        <div class="row sthlmBNB-no-pad">
+            <div class="col p-3 sthlmBNB-light-blue-bg ">
+            <h2 class="inline-text text-white">Mina bokningar</h2>
+            </div>
+        </div>
+<form name="myForm" ng-submit="mySubmitAbout()" class="p-3">
+    <label class="item item-input item-stacked-label padding-zero border-zero">
+        <span class="input-label required sthlmBNB-paddin-bottom">E-post</span>
+        <input type="email" name="reservation_email" required placeholder="Ange din e-postadress" ng-model="data.reservation_email" class="sthlmBNB-paddin-left">
+    </label>
+    <div ng-show="myForm.reservation_email.$error.email" class="error bg-danger"><p  class="text-white p-3 p-error " >Ange en giltig e-postadress</p></div> 
+
+    <input type="submit" value="Leta upp bokningar" ng-disabled="!(!!data.reservation_email )" class="button button-block button-positive sthlmBNB-orange-bg p-1" >
+    
+</form>
+        <div id="response" class="p-3" style="display: none;">
+            <h2 >Vi hittade inga bokningar</h2>
+        </div>
+        <ion-list >
+            <ion-item ng-repeat="room in myAbout"  class="card">
+                <h2 class="p-3" style="padding-top:1rem;">{{room.reservation_room_headline}}</h2>
+                <div id="respons" class="p-3" >
+                        <p >
+                        Du har bokat från {{room.reservation_arrival}} till {{room.reservation_department}}<BR>
+                        Bokningsnummer: {{room.reservation_ID}}<BR>
+                        Antal vuxna: {{room.reservation_adult}}<BR> 
+                        Antal barn: {{room.reservation_child}}<BR>
+                        Totalt antal dagar: {{room.reservation_total_days}} á {{room.reservation_total_cost/room.reservation_total_days}}kr<BR>
+                        Total summa: {{room.reservation_total_cost}}kr
+                        </p>
+                </div>
+
+
+            </ion-item>
+        </ion-list>
+
+    </ion-content>
+</ion-view>
